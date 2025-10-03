@@ -17,7 +17,6 @@
         }
         body {
             font-family: "comic sans MT"; /* define a fonte utilizada */
-            /* define a cor de fundo do corpo da página */
             margin: 0; /* remove margens externas */
             padding: 0; /* remove preenchimento externo */
             background-image: url(fundo.png);
@@ -28,6 +27,7 @@
             min-height: 300vh;
 
         }
+
 
         /* estilo para o contêiner principal */
         #container {
@@ -78,6 +78,11 @@
             border-color:#46474a;
         }
 
+        .botaotema {
+            position: absolute;
+            left: 25px;
+        }
+
         /* estilo para o botão ao passar o mouse por cima */
         button:hover {
             background-color:#3c8532; /* altera a cor de fundo ao passar o mouse */
@@ -107,6 +112,9 @@
     <div id="container">
         <!-- título da página -->
         <h1>Craft's Machine</h1>
+
+        <button class="botaotema" id="botaoTema">Modo</button>
+
         <!-- entrada de valor -->
         <input id="inputValue" type="text" placeholder="Digite o valor">
         <!-- seleção da base -->
@@ -133,12 +141,30 @@
     </div>
     <!-- script javascript -->
     <script>
+        let fundo = 1
+        document.getElementById("botaoTema").addEventListener("click", () => {
+            if (fundo === 1) {
+                document.body.style.backgroundImage = 'url("fundoclaro.png")';
+                fundo = 2;
+            } else {
+                document.body.style.backgroundImage = 'url("fundo.png")';
+                fundo = 1;
+            }
+        })
+
             const botao = document.getElementById('botao');
+            const botao2 = document.getElementById('botaoTema');
+            const select = document.getElementById('inputBase')
             const audio = document.getElementById('audio');
-            botao.addEventListener('click', () => {
-            audio.currentTime = 0;
-            audio.play();
-            });
+
+            function tocar() {
+                audio.currentTime = 0;
+                audio.play();
+            }
+
+            botao.addEventListener("click", tocar);
+            botao2.addEventListener("click", tocar);
+            select.addEventListener("click", tocar);
             
         // função para converter os valores
         function converter() {
